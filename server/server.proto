@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package server;
+
+service Exec {
+    rpc Exec(stream Executable) returns (Response) {}
+}
+
+message Executable {
+    bytes chunk = 1;
+    repeated string args = 2;
+}
+
+message Response {
+    int32 exitCode = 1;
+    bytes stdout = 2;
+    bytes stderr = 3;
+}
