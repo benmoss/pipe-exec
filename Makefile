@@ -1,6 +1,6 @@
-.PHONY: all clean proto docker
+.PHONY: all clean proto push
 
-all: build docker
+all: build
 
 build: proto out/client.exe out/server.exe out/hello.exe
 
@@ -19,6 +19,6 @@ proto:
 clean:
 	rm -rf out
 
-docker: out/client.exe out/server.exe out/hello.exe
+push: out/client.exe out/server.exe out/hello.exe
 	docker build . --tag benmoss/pipe-exec:latest
 	docker push benmoss/pipe-exec:latest
