@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pipe-exec
+spec:
+  template:
+    spec:
+      containers:
+      - name: pipe-exec
+        image: benmoss/pipe-exec
+        volumeMounts:
+        - mountPath: \\.\pipe\pipe-exec
+          name: pipe
+      restartPolicy: Never
+      nodeSelector:
+        beta.kubernetes.io/os: windows
+      tolerations:
+      - key: "windows"
+        operator: "Equal"
+        value: "2019"
+        effect: "NoSchedule"
+      volumes:
+        - name: pipe
+          hostPath:
+            path: \\.\pipe\pipe-exec

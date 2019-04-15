@@ -13,12 +13,11 @@ import (
 
 const (
 	sddl      = "D:P(A;;GA;;;BA)(A;;GA;;;SY)"
-	pipeName  = `\\.\pipe\foo`
 	chunkSize = 64 * 1024 // 64 KiB
 )
 
 func main() {
-	conn, err := grpc.Dial(pipeName, grpc.WithContextDialer(func(_ context.Context, target string) (net.Conn, error) {
+	conn, err := grpc.Dial(server.PipeName, grpc.WithContextDialer(func(_ context.Context, target string) (net.Conn, error) {
 		return winio.DialPipe(target, nil)
 	}), grpc.WithInsecure())
 	if err != nil {

@@ -9,6 +9,10 @@ import (
 	"os/exec"
 )
 
+const (
+	PipeName = `\\.\pipe\pipe-exec`
+)
+
 type ExecImpl struct {
 }
 

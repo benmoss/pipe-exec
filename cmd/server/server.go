@@ -9,12 +9,11 @@ import (
 )
 
 var (
-	sddl     = "D:P(A;;GA;;;BA)(A;;GA;;;SY)"
-	pipeName = `\\.\pipe\foo`
+	sddl = "D:P(A;;GA;;;BU)"
 )
 
 func main() {
-	l, err := winio.ListenPipe(pipeName, &winio.PipeConfig{
+	l, err := winio.ListenPipe(server.PipeName, &winio.PipeConfig{
 		SecurityDescriptor: sddl,
 		MessageMode:        true,
 		InputBufferSize:    65536,
